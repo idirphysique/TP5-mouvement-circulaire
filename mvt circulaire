@@ -1,0 +1,75 @@
+# ##########################################################################
+# Programme Python permettant de tracer la trajectoire d'un mouvement
+# circulaire uniforme dans le but de montrerque la méthode centrée pour approcher
+# la vitesse donne de meilleurs résultats que la méthode de la dérivée numérique à droite.
+# ##########################################################################
+# O. CHAUMETTE - Lycée JP SARTRE - 69500 BRON - olivier.chaumette@ac-lyon.fr
+
+
+# ##########################
+# IMPORTATION DES MODULES #
+# #########################
+# importation de NUMPY (pour gestion tableaux et calculs) sous l'alias "np"
+import numpy as np
+# importation de PYPLOT (du module MATPLOTLIB, pour le tracé de courbes) sous l'alias "plt"
+import matplotlib.pyplot as plt
+
+# #################################
+# Fonction qui simplifie le tracé du vecteur vitesse
+# afin que l'élève n'ait pas à définir l'origine
+# du vecteur en termes de coordonnées
+# (pour ne pas mélanger des positions et des coordonées de vecteurs)
+# #################################
+def draw_Vector2(numero_du_point, abscisse_vecteur, ordonnee_vecteur, couleur,echelle):
+    global x,y
+    plt.quiver(x[numero_du_point], y[numero_du_point],abscisse_vecteur,ordonnee_vecteur,color=couleur,scale=echelle)
+
+
+# #################################
+# Données issues d'un pointage d'un mouvement circulaire uniforme
+# #################################
+t = np.array([0.0,0.39269908169872414,0.7853981633974483,1.1780972450961724,1.5707963267948966,1.9634954084936207,2.356194490192345,2.748893571891069,3.141592653589793,3.5342917352885173,3.9269908169872414,4.319689898685965,4.71238898038469,5.105088062083414,5.497787143782138,5.890486225480862,6.283185307179586])
+x= np.array([2.0,1.8477590650225735,1.4142135623730951,0.7653668647301797,1.2246467991473532e-16,-0.7653668647301795,-1.414213562373095,-1.8477590650225735,-2.0,-1.8477590650225737,-1.4142135623730954,-0.7653668647301807,-3.6739403974420594e-16,0.76536686473018,1.4142135623730947,1.847759065022573,2.0])
+y= np.array([0.0,0.7653668647301796,1.414213562373095,1.8477590650225735,2.0,1.8477590650225735,1.4142135623730951,0.7653668647301798,2.4492935982947064e-16,-0.7653668647301793,-1.414213562373095,-1.847759065022573,-2.0,-1.8477590650225733,-1.4142135623730954,-0.7653668647301808,-4.898587196589413e-16])
+
+# #################################
+# affichage de la trajectoire + axes
+# #################################
+plt.plot (x,y,"rx")
+plt.xlabel("x en mètres")
+plt.ylabel("y en mètres")
+plt.title("Trajectoire dans le cas d'un\nmouvement circulaire uniforme")
+
+
+
+
+""" TRAVAIL 1:
+Taper,ci-dessous le code permettant
+de calculer Vx et Vy au point n°8"""
+
+
+draw_Vector2(8,Vx,Vy,"r",10)
+
+
+
+""" TRAVAIL 2:
+Taper,ci-dessous le code permettant
+de calculer Vx et Vy au point n°8
+en utilisant la méthode dite "centrée" """
+
+
+draw_Vector2(8,Vx,Vy,"g",10)
+
+""" FIN du travail des élèves
+------------------------------ """
+
+# affichage de la grille, légende etc...
+# la legende est écrite en Latex
+plt.plot(0,0,"r",label=r"$\overrightarrow{V_8}=\frac{\overrightarrow{{M_8}{M_9}}}{Δt}$")
+plt.plot(0,0,"g",label=r"$\overrightarrow{V_8}=\frac{\overrightarrow{{M_7}{M_9}}}{2Δt}$")
+plt.plot(0,0,"ko")
+plt.grid()
+plt.legend(prop={'size':14})
+# le repère doit être orthonormé:
+plt.axis('equal')
+plt.show()
